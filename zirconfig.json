@@ -1,0 +1,28 @@
+{
+	"name": "Redstone Tools",
+	"author": "SolarFlurry",
+	"description": "A port of the mod 'Redstone Tools' to Bedrock",
+	"version": [
+		1,
+		0,
+		0
+	],
+	"packs": {
+		"behavior": "./behavior",
+		"resource": "./resource"
+	},
+	"scripts": {
+		"entry": "scripts/main.js",
+		"enable_beta": true
+	},
+	"compileTo": [
+		{
+			"mcVersion": "edu",
+			"reqVersion": [
+				1,
+				21,
+				91
+			]
+		}
+	]
+}

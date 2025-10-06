@@ -1,0 +1,17 @@
+{
+  "name": "redstonetools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@minecraft/server": "^2.1.0-beta.1.21.90-stable",
+    "@minecraft/math": "^2.2.11"
+  }
+}
