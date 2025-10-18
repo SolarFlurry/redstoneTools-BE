@@ -13,15 +13,16 @@
 	},
 	"scripts": {
 		"entry": "scripts/main.js",
-		"enable_beta": true
+		"enable_beta": true,
+		"debug_utilities": true
 	},
 	"compileTo": [
 		{
-			"mcVersion": "edu",
+			"mcVersion": "stable",
 			"reqVersion": [
 				1,
 				21,
-				91
+				100
 			]
 		}
 	]

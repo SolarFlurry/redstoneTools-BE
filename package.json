@@ -1,7 +1,7 @@
 {
   "name": "redstonetools",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a port of the Redstone Tools mod (originally for Java Edition) to Bedrock Edition.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,16 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@minecraft/server": "^2.1.0-beta.1.21.90-stable",
-    "@minecraft/math": "^2.2.11"
-  }
+    "@minecraft/debug-utilities": "^1.0.0-beta.1.21.111-stable",
+    "@minecraft/math": "^2.2.11",
+    "@minecraft/server": "^2.3.0-beta.1.21.111-stable"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SolarFlurry/redstoneTools-BE.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SolarFlurry/redstoneTools-BE/issues"
+  },
+  "homepage": "https://github.com/SolarFlurry/redstoneTools-BE#readme"
 }
