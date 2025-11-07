@@ -1,5 +1,5 @@
 import { BlockType, CommandPermissionLevel, CustomCommand, CustomCommandOrigin, CustomCommandParamType, CustomCommandStatus } from "@minecraft/server";
-import { playerData } from "core/selection";
+import { playerData } from "core/player";
 import JobPromise from "utils/runjob";
 import { Vector3Utils } from "utils/vector3";
 
@@ -30,8 +30,8 @@ export function setCommandExecute(origin: CustomCommandOrigin, tileName: BlockTy
 		message: `Player ${origin.sourceEntity.nameTag} does not have permission`,
 		status: CustomCommandStatus.Failure
 	}
-    new JobPromise(data.iterateOverRange((pos, start) => {
+    new JobPromise(data.selection.iterateOverRange((pos, start) => {
         console.log(`set: ${Vector3Utils.toString(pos)}`);
-        data.dimension.setBlockType(Vector3Utils.add(pos, start), tileName);
+        data.selection.dimension.setBlockType(Vector3Utils.add(pos, start), tileName);
     }), (progress) => {})
 }

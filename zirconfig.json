@@ -14,11 +14,14 @@
 	"scripts": {
 		"entry": "scripts/main.js",
 		"enable_beta": true,
+		"dependencies": [
+			"ui"
+		],
 		"debug_utilities": true
 	},
 	"compileTo": [
 		{
-			"mcVersion": "stable",
+			"target": "stable",
 			"reqVersion": [
 				1,
 				21,

@@ -1,5 +1,5 @@
 import { CommandPermissionLevel, CustomCommand, CustomCommandOrigin, CustomCommandParamType, CustomCommandStatus } from "@minecraft/server";
-import { playerData } from "core/selection";
+import { playerData } from "core/player";
 import { getDirection } from "utils/direction";
 import JobPromise from "utils/runjob";
 import { Vector3Utils } from "utils/vector3";
@@ -57,13 +57,13 @@ export function moveCommandExecute(origin: CustomCommandOrigin, moveAmount: numb
             dirVector = {x: 0, y: -1, z: 0}
             break;
     }
-    new JobPromise(data.getRegion({includeAir: false}), (progress) => {}).then(() => {
-    new JobPromise(data.iterateOverRange((pos, start) => {
-        data.dimension.setBlockType(Vector3Utils.add(pos, start), "minecraft:air");
+    new JobPromise(data.selection.getRegion({includeAir: false}), (progress) => {}).then(() => {
+    new JobPromise(data.selection.iterateOverRange((pos, start) => {
+        data.selection.dimension.setBlockType(Vector3Utils.add(pos, start), "minecraft:air");
         }), (progress) => {}).then(() => {
-    data.setPos1(Vector3Utils.add(data.points[0], Vector3Utils.scale(dirVector, moveAmount)))
-    data.setPos2(Vector3Utils.add(data.points[1], Vector3Utils.scale(dirVector, moveAmount)))
-    data.updateSelection()
-    new JobPromise(data.setRegion(data.points[0]), (progress) => {})
+    data.selection.setPos1(Vector3Utils.add(data.selection.points[0], Vector3Utils.scale(dirVector, moveAmount)))
+    data.selection.setPos2(Vector3Utils.add(data.selection.points[1], Vector3Utils.scale(dirVector, moveAmount)))
+    data.selection.updateSelection()
+    new JobPromise(data.selection.setRegion(data.selection.points[0]), (progress) => {})
     })})
 }

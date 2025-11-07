@@ -4,8 +4,7 @@ import { Vector3, Dimension, BlockPermutation } from "@minecraft/server";
 import { getRange, iterateOverRange } from "utils/range";
 import JobPromise from "utils/runjob";
 import { RegionBlock } from "./region";
-
-export const playerData = new Map<string, PlayerSelection>();
+import { playerData, PlayerData } from "./player";
 
 export class PlayerSelection {
 	constructor (dimension: Dimension) {

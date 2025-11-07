@@ -1,5 +1,6 @@
 import { CommandPermissionLevel, CustomCommand, CustomCommandOrigin, CustomCommandParamType, CustomCommandResult, CustomCommandStatus, system, Vector3 } from '@minecraft/server'
-import { playerData, PlayerSelection } from 'core/selection'
+import { PlayerSelection } from 'core/selection'
+import { playerData } from 'core/player'
 import { getDirection } from 'utils/direction'
 import JobPromise from 'utils/runjob'
 import { Vector3Utils } from 'utils/vector3'
@@ -76,20 +77,23 @@ export function stackCommandExecute(origin: CustomCommandOrigin, stackAmount: nu
 	}
 	let amount: number;
 	if (Vector3Utils.equals(dirVector, {x: 1, y: 0, z: 0}) || Vector3Utils.equals(dirVector, {x: -1, y: 0, z: 0})) {
-		amount = data.bounds().x;
+		amount = data.selection.bounds().x;
 	} else if (Vector3Utils.equals(dirVector, {x: 0, y: 1, z: 0}) || Vector3Utils.equals(dirVector, {x: 0, y: -1, z: 0})) {
-		amount = data.bounds().y;
+		amount = data.selection.bounds().y;
 	} else if (Vector3Utils.equals(dirVector, {x: 0, y: 0, z: 1}) || Vector3Utils.equals(dirVector, {x: 0, y: 0, z: -1})) {
-		amount = data.bounds().z;
+		amount = data.selection.bounds().z;
 	} else {
-		amount = data.bounds().y
+		amount = data.selection.bounds().y
 	}
-	new JobPromise(data.getRegion({includeAir: false}), (progress) => {}).then(() => {
+	new JobPromise(data.selection.getRegion({includeAir: false}), (progress) => {}).then(() => {
 		if (stackOffset) {
-			syncStack(data, dirVector, stackOffset, stackAmount);
+			syncStack(data.selection, dirVector, stackOffset, stackAmount);
 		} else {
 			for (let i = 0; i < stackAmount; i++) {
-				new JobPromise(data.setRegion(Vector3Utils.add(data.points[0], Vector3Utils.scale(dirVector, amount*(i+1)))), (progress) => {})
+				new JobPromise(
+					data.selection.setRegion(Vector3Utils.add(data.selection.points[0], Vector3Utils.scale(dirVector, amount*(i+1)))),
+					(progress) => {}
+				)
 			}
 		}
 	})
