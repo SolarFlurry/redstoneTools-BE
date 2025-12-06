@@ -12,6 +12,7 @@ import { SettingsCommand, settingsCommandExecute } from 'commands/settings'
 
 system.beforeEvents.startup.subscribe((init: StartupEvent) => {
 	init.customCommandRegistry.registerEnum("redtools:direction", ["r", "l", "f", "b", "u", "d", "right", "left", "front", "back", "up", "down"])
+	init.customCommandRegistry.registerEnum("redtools:color", ["red", "orange", "yellow", "lime", "green", "cyan", "light_blue", "blue", "purple", "magenta", "pink", "brown", "light_gray", "gray", "black", "white"])
 	init.customCommandRegistry.registerCommand(StackCommand, stackCommandExecute)
 	init.customCommandRegistry.registerCommand(SignalStrengthCommand, signalStrengthExecute)
 	init.customCommandRegistry.registerCommand(SetCommand, setCommandExecute)

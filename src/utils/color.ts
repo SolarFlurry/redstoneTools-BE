@@ -1,3 +1,5 @@
+import { Block } from "@minecraft/server"
+
 export enum Color {
 	None = "none",
 	Red = "red",
@@ -38,4 +40,28 @@ export function getColorOf(type: string): Color {
 		case "minecraft:white_wool": case "minecraft:white_stained_glass": return Color.White
 		default: return Color.None;
 	}
+}
+
+export function isGlass(type: string): boolean {
+	return type.includes("glass")
+}
+
+export function isWool(type: string): boolean {
+	return type.includes("wool");
+}
+
+export function setGlass(block: Block, color: Color) {
+	if (color == Color.None) {
+		block.setType("glass");
+		return;
+	}
+	block.setType(`minecraft:${color}_stained_glass`);
+}
+
+export function setWool(block: Block, color: Color) {
+	if (color == Color.None) {
+		block.setType("white_wool");
+		return;
+	}
+	block.setType(`minecraft:${color}_wool`);
 }
