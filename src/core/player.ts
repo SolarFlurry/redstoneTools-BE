@@ -8,6 +8,8 @@ export class PlayerData {
         outline: boolean,
         highlight: boolean,
         redstoneIndicator: boolean,
+        autoDust: boolean,
+        topHalfSlab: boolean,
     }
 
     constructor (selection: PlayerSelection) {
@@ -16,6 +18,8 @@ export class PlayerData {
             outline: true,
             highlight: false,
             redstoneIndicator: true,
+            autoDust: false,
+            topHalfSlab: true,
         }
     }
 }

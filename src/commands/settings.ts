@@ -31,14 +31,22 @@ export function settingsCommandExecute(origin: CustomCommandOrigin) {
             .label("Selection")
             .toggle("Outline", {defaultValue: data.settings.outline})
             .toggle("Highlight", {defaultValue: data.settings.highlight})
+            .divider()
+            .label("Toggles")
+            .toggle("Redstone Indicator", {defaultValue: data.settings.redstoneIndicator})
+            .toggle("Auto Dust", {defaultValue: data.settings.autoDust})
+            .toggle("Auto Top Half Slab", {defaultValue: data.settings.topHalfSlab})
             .submitButton("Apply")
         form.show(<Player>origin.sourceEntity).then((r) => {
             if (r.canceled) return;
 
-            let [, outline, highlight] = r.formValues
+            let [, outline, highlight,,, redstoneIndicator, autodust, topHalfSlab] = r.formValues
 
             data.settings.highlight = <boolean>highlight
-            data.settings.outline = <boolean>highlight
+            data.settings.outline = <boolean>outline
+            data.settings.redstoneIndicator = <boolean>redstoneIndicator
+            data.settings.autoDust = <boolean>autodust
+            data.settings.topHalfSlab = <boolean>topHalfSlab
         })
     })
 }

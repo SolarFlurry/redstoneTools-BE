@@ -5,7 +5,7 @@ import { Vector3Utils } from "utils/vector3";
 
 export const SetCommand: CustomCommand = {
     name: "redtools:set",
-    description: "sets the selection to a block",
+    description: "Sets every block in the selection",
     permissionLevel: CommandPermissionLevel.Any,
     cheatsRequired: true,
     mandatoryParameters: [

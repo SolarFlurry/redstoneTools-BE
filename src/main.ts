@@ -127,3 +127,13 @@ world.afterEvents.playerBreakBlock.subscribe((event) => {
 		}
 	}
 })
+
+world.afterEvents.playerPlaceBlock.subscribe((event) => {
+	let data = playerData.get(event.player.id);
+	if (data.settings.topHalfSlab && event.block.typeId.includes("slab")) {
+		event.block.setPermutation(event.block.permutation.withState("minecraft:vertical_half", "top"));
+	}
+	if (data.settings.autoDust) {
+		event.block.above().setType("redstone_dust");
+	}
+})

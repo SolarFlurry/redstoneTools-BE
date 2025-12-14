@@ -15,7 +15,7 @@ export const SignalStrengthCommand: CustomCommand = {
 
 export function signalStrengthExecute(origin: CustomCommandOrigin, signalStrength: number): CustomCommandResult {
     if (signalStrength < 0 || signalStrength > 15) return {
-        message: "Signal strenght must be in the range 0-15",
+        message: "Signal strength must be in the range 0-15",
         status: CustomCommandStatus.Failure
     }
     if (!origin.sourceEntity) return {

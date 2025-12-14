@@ -6,7 +6,7 @@ import { Vector3Utils } from "utils/vector3";
 
 export const MoveCommand: CustomCommand = {
     name: "redtools:move",
-    description: "moves the selection",
+    description: "Moves the selection",
     permissionLevel: CommandPermissionLevel.Any,
     cheatsRequired: true,
     mandatoryParameters: [
