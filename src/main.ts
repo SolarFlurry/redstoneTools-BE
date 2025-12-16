@@ -136,6 +136,6 @@ world.afterEvents.playerPlaceBlock.subscribe((event) => {
 		event.block.setPermutation(event.block.permutation.withState("minecraft:vertical_half", "top"));
 	}
 	if (data.settings.autoDust) {
-		event.block.above().setType("redstone_dust");
+		event.block.above().setType("redstone_wire");
 	}
 })
