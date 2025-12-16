@@ -36,7 +36,7 @@ export class PlayerSelection {
 		let [lower, upper] = getRange(this.points[0], this.points[1]);
 		upper = Vector3Utils.add(upper, {x: 1.01, y: 1.01, z: 1.01})
 		lower = Vector3Utils.subtract(lower, {x: 0.01, y: 0.01, z: 0.01})
-		this.outline.location = lower;
+		this.outline.setLocation(lower)
 		this.outline.bound = Vector3Utils.subtract(upper, lower);
 	}
 
