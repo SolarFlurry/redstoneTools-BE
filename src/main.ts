@@ -10,6 +10,7 @@ import { MoveCommand, moveCommandExecute } from 'commands/move'
 import { getRange } from 'utils/range'
 import { SettingsCommand, settingsCommandExecute } from 'commands/settings'
 import { ColorcodeCommand, colorcodeCommandExecute } from 'commands/colorcode'
+import { RotateCommand, rotateCommandExecute } from 'commands/rotate'
 
 system.beforeEvents.startup.subscribe((init: StartupEvent) => {
 	init.customCommandRegistry.registerEnum("redtools:direction", ["r", "l", "f", "b", "u", "d", "right", "left", "front", "back", "up", "down"])
@@ -20,6 +21,7 @@ system.beforeEvents.startup.subscribe((init: StartupEvent) => {
 	init.customCommandRegistry.registerCommand(MoveCommand, moveCommandExecute)
 	init.customCommandRegistry.registerCommand(SettingsCommand, settingsCommandExecute)
 	init.customCommandRegistry.registerCommand(ColorcodeCommand, colorcodeCommandExecute)
+	init.customCommandRegistry.registerCommand(RotateCommand, rotateCommandExecute)
 })
 
 world.afterEvents.playerJoin.subscribe((event) => {
@@ -132,10 +134,10 @@ world.afterEvents.playerBreakBlock.subscribe((event) => {
 
 world.afterEvents.playerPlaceBlock.subscribe((event) => {
 	let data = playerData.get(event.player.id);
-	if (data.settings.topHalfSlab && event.block.typeId.includes("slab")) {
+	if (data?.settings.topHalfSlab && event.block.typeId.includes("slab")) {
 		event.block.setPermutation(event.block.permutation.withState("minecraft:vertical_half", "top"));
 	}
-	if (data.settings.autoDust) {
+	if (data?.settings.autoDust) {
 		event.block.above().setType("redstone_wire");
 	}
 })

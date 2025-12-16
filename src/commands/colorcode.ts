@@ -1,6 +1,7 @@
 import { CommandPermissionLevel, CustomCommand, CustomCommandOrigin, CustomCommandParamType, CustomCommandStatus } from "@minecraft/server";
 import { playerData } from "core/player";
 import { Color, isGlass, isWool, setGlass, setWool } from "utils/color";
+import JobPromise from "utils/runjob";
 import { Vector3Utils } from "utils/vector3";
 
 export const ColorcodeCommand: CustomCommand = {
@@ -32,12 +33,12 @@ export function colorcodeCommandExecute(origin: CustomCommandOrigin, color: Colo
 		status: CustomCommandStatus.Failure
 	}
 
-	data.selection.iterateOverRange((pos, start) => {
+	new JobPromise(data.selection.iterateOverRange((pos, start) => {
 		const block = data.selection.dimension.getBlock(Vector3Utils.add(pos, start));
 		if (isGlass(block.typeId)) {
 			setGlass(block, color);
 		} else if (isWool(block.typeId)) {
 			setWool(block, color);
 		}
-	})
+	}), (progress) => {})
 }

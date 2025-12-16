@@ -48,6 +48,13 @@ export class PlayerSelection {
 		yield* iterateOverRange(this.points[0], this.points[1], this.dimension, iterator, args)
 	}
 
+	public *iterateOverBlocks(iterator: (arg0: Vector3, arg1: RegionBlock, ...args: any[]) => void, ...args: any[]) {
+		for (const [key, value] of this.region) {
+			iterator(key, value, args)
+			yield;
+		}
+	}
+
 	/**
 	 * Gets the region the selection is occupying
 	 * @param getRegionOptions - Options for getRegion method
@@ -59,7 +66,6 @@ export class PlayerSelection {
 			const block = this.dimension.getBlock(Vector3Utils.add(pos, start))
 			if (!(block.isAir && !getRegionOptions.includeAir) && block) {
 				console.log(`get - ${Vector3Utils.toString(pos)}: ${block.typeId}`)
-				console.log(`get - air:${block.isAir}, include:${getRegionOptions.includeAir}`)
 				let permutation = block.permutation;
 				if (permutation.type.id === "minecraft:powered_comparator") {
 					permutation = BlockPermutation.resolve("minecraft:unpowered_comparator", permutation.getAllStates())
