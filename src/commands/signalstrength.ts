@@ -38,7 +38,7 @@ export function signalStrengthExecute(origin: CustomCommandOrigin, signalStrengt
                 const itemsRequired = Math.max(signalStrength, Math.ceil((27 * 64 / 14) * (signalStrength-1)))
                 console.log(itemsRequired)
                 container.clearAll();
-                for (let i = itemsRequired; i > 64; i -= 64) {
+                for (let i = itemsRequired; i >= 64; i -= 64) {
                         container.addItem(new ItemStack("minecraft:redstone", 64));
                 }
                 if (itemsRequired % 64 > 0) container.addItem(new ItemStack("minecraft:redstone", itemsRequired % 64));
