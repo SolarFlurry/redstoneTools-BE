@@ -13,20 +13,20 @@
 	},
 	"scripts": {
 		"entry": "scripts/main.js",
-		"enable_beta": true,
-		"dependencies": [
-			"ui"
-		],
-		"debug_utilities": true
+		"modules": [
+			{
+				"module_name": "@minecraft/server",
+				"version": "2.5.0-beta"
+			},
+			{
+				"module_name": "@minecraft/server-ui",
+				"version": "2.1.0-beta"
+			},
+			{
+				"module_name": "@minecraft/debug-utilities",
+				"version": "1.0.0-beta"
+			}
+		]
 	},
-	"compileTo": [
-		{
-			"target": "stable",
-			"reqVersion": [
-				1,
-				21,
-				100
-			]
-		}
-	]
+	"min_engine_version": [1, 21, 100]
 }
