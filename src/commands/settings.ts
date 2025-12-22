@@ -36,17 +36,23 @@ export function settingsCommandExecute(origin: CustomCommandOrigin) {
             .toggle("Redstone Indicator", {defaultValue: data.settings.redstoneIndicator})
             .toggle("Auto Dust", {defaultValue: data.settings.autoDust})
             .toggle("Auto Top Half Slab", {defaultValue: data.settings.topHalfSlab})
+            .divider()
+            .label("Command Specific")
+            .toggle("Size Relative Offset", {defaultValue: data.settings.sizeRelativeOffset})
+            .toggle("Hologram Preview", {defaultValue: data.settings.hologramPreview})
             .submitButton("Apply")
         form.show(<Player>origin.sourceEntity).then((r) => {
             if (r.canceled) return;
 
-            let [, outline, highlight,,, redstoneIndicator, autodust, topHalfSlab] = r.formValues
+            let [, outline, highlight,,, redstoneIndicator, autodust, topHalfSlab,,, sizeRelativeOffset, hologramPreview] = r.formValues
 
             data.settings.highlight = <boolean>highlight
             data.settings.outline = <boolean>outline
             data.settings.redstoneIndicator = <boolean>redstoneIndicator
             data.settings.autoDust = <boolean>autodust
             data.settings.topHalfSlab = <boolean>topHalfSlab
+            data.settings.sizeRelativeOffset = <boolean>sizeRelativeOffset
+            data.settings.hologramPreview = <boolean>hologramPreview
         })
     })
 }

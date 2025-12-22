@@ -192,4 +192,7 @@ export class Vector3Utils {
         const sin = Math.sin(a);
         return { x: v.x * cos - v.y * sin, y: v.y * cos + v.x * sin, z: v.z };
       }
+      static new(x: number, y: number, z: number): Vector3 {
+        return {x, y, z}
+      }
 }

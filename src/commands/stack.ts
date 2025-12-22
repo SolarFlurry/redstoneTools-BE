@@ -87,7 +87,7 @@ export function stackCommandExecute(origin: CustomCommandOrigin, stackAmount: nu
 	}
 	new JobPromise(data.selection.getRegion({includeAir: false}), (progress) => {}).then(() => {
 		if (stackOffset) {
-			syncStack(data.selection, dirVector, stackOffset, stackAmount);
+			syncStack(data.selection, dirVector, stackOffset + (data.settings.sizeRelativeOffset ? amount : 0), stackAmount);
 		} else {
 			for (let i = 0; i < stackAmount; i++) {
 				new JobPromise(

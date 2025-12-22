@@ -2,10 +2,10 @@
 	"format_version": "1.10.0",
 	"particle_effect": {
 		"description": {
-			"identifier": "redtools:signal_strength",
+			"identifier": "redtools:outline",
 			"basic_render_parameters": {
 				"material": "particles_alpha",
-				"texture": "textures/redtools/particles/redstone_ss"
+				"texture": "textures/particle/particles"
 			}
 		},
 		"components": {
@@ -17,23 +17,25 @@
 			},
 			"minecraft:emitter_shape_point": {},
 			"minecraft:particle_lifetime_expression": {
-				"max_lifetime": "v.lifetime"
+				"max_lifetime": "variable.lifetime"
 			},
-			"minecraft:particle_initial_speed": 0,
-			"minecraft:particle_motion_dynamic": {},
 			"minecraft:particle_appearance_billboard": {
-				"size": [0.5, 0.5],
-				"facing_camera_mode": "direction_y",
-				"direction": {
-					"mode": "custom",
-					"custom_direction": [0, 0, 1]
-				},
+				"size": [0.2, 0.2],
+				"facing_camera_mode": "rotate_xyz",
 				"uv": {
-					"texture_width": 256,
+					"texture_width": 16,
 					"texture_height": 16,
-					"uv": ["v.signal_strength*16", 0],
-					"uv_size": [16, 16]
+					"uv": [6, 11],
+					"uv_size": [1, 1]
 				}
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": [
+					"variable.dot_color.r", 
+					"variable.dot_color.g", 
+					"variable.dot_color.b",
+					"variable.dot_color.a"
+				]
 			}
 		}
 	}
