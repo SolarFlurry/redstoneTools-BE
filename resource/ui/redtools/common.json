@@ -1,3 +1,103 @@
 {
-	"namespace": "redtools"
+   "namespace": "redtools",
+   "title_bar": {
+      "$title|default": "default_title_text",
+      "type": "panel",
+      "layer": 100,
+      "anchor_from": "top_left",
+      "anchor_to": "top_left",
+      "size": [
+         "100%",
+         16
+      ],
+      "offset": [
+         0,
+         -16
+      ],
+      "controls": [
+         {
+            "text": {
+               "type": "label",
+               "font_type": "MinecraftTen",
+               "font_size": "medium",
+               "text": "$title",
+               "anchor_from": "left_middle",
+               "anchor_to": "left_middle",
+               "offset": [
+                  5,
+                  -1
+               ],
+               "layer": 8,
+               "bindings": [
+                  {
+                     "binding_name": "#title_text"
+                  }
+               ]
+            }
+         },
+         {
+            "background@redtools.background": {}
+         },
+         {
+            "close_button": {
+               "type": "button",
+               "default_control": "default",
+               "hover_control": "hover",
+               "anchor_from": "top_right",
+               "anchor_to": "top_right",
+               "size": [
+                  20,
+                  20
+               ],
+               "offset": [
+                  0,
+                  -1
+               ],
+               "sound_name": "random.click",
+               "controls": [
+                  {
+                     "default": {
+                        "type": "image",
+                        "size": [
+                           20,
+                           20
+                        ],
+                        "texture": "textures/ui/close_X_button"
+                     }
+                  },
+                  {
+                     "hover": {
+                        "type": "image",
+                        "size": [
+                           20,
+                           20
+                        ],
+                        "texture": "textures/ui/close_X_button_hover"
+                     }
+                  }
+               ],
+               "button_mappings": [
+                  {
+                     "from_button_id": "button.menu_select",
+                     "to_button_id": "button.menu_exit",
+                     "mapping_type": "pressed"
+                  },
+                  {
+                     "from_button_id": "button.menu_ok",
+                     "to_button_id": "button.menu_exit",
+                     "mapping_type": "focused"
+                  }
+               ]
+            }
+         }
+      ]
+   },
+   "background": {
+      "type": "image",
+      "size": [
+         "100% + 5px",
+         "100% + 5px"
+      ],
+      "texture": "textures/redtools/ui/circuit_lib_background"
+   }
 }

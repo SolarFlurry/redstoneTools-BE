@@ -27,7 +27,7 @@ export function settingsCommandExecute(origin: CustomCommandOrigin) {
 
     system.run(() => {
         const form = new ModalFormData()
-            .title("Redstone Tools Settings")
+            .title("redtools:settings")
             .label("Selection")
             .toggle("Outline", {defaultValue: data.settings.outline})
             .toggle("Highlight", {defaultValue: data.settings.highlight})

@@ -11,6 +11,7 @@ import { getRange } from 'utils/range'
 import { SettingsCommand, settingsCommandExecute } from 'commands/settings'
 import { ColorcodeCommand, colorcodeCommandExecute } from 'commands/colorcode'
 import { RotateCommand, rotateCommandExecute } from 'commands/rotate'
+import { LibraryCommand, libraryCommandExecute } from 'commands/library'
 
 system.beforeEvents.startup.subscribe((init: StartupEvent) => {
 	init.customCommandRegistry.registerEnum("redtools:direction", ["r", "l", "f", "b", "u", "d", "right", "left", "front", "back", "up", "down"])
@@ -22,6 +23,7 @@ system.beforeEvents.startup.subscribe((init: StartupEvent) => {
 	init.customCommandRegistry.registerCommand(SettingsCommand, settingsCommandExecute)
 	init.customCommandRegistry.registerCommand(ColorcodeCommand, colorcodeCommandExecute)
 	init.customCommandRegistry.registerCommand(RotateCommand, rotateCommandExecute)
+	init.customCommandRegistry.registerCommand(LibraryCommand, libraryCommandExecute)
 })
 
 world.afterEvents.playerJoin.subscribe((event) => {

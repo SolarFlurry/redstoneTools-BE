@@ -16,10 +16,14 @@
 					],
 					"controls": [
 						{
-							"title_bar@circuit_lib.title_bar": {}
+							"title_bar@redtools.title_bar": {
+                        "$title": "Circuit Library"
+                     }
 						},
 						{
-							"background@circuit_lib.background": {}
+							"background@redtools.background": {
+                        "alpha": 0.8
+                     }
 						},
 						{
 							"panel_main@circuit_lib.panel_main": {}
@@ -37,99 +41,6 @@
 				"binding_type": "view",
 				"source_property_name": "(#title_text = 'redtools:circuit_library'",
 				"target_property_name": "#visible"
-			}
-		]
-	},
-	"close_button": {
-		"type": "button",
-		"default_control": "default",
-		"hover_control": "hover",
-		"anchor_from": "top_right",
-		"anchor_to": "top_right",
-		"size": [
-			20,
-			20
-		],
-		"sound_name": "random.click",
-		"controls": [
-			{
-				"default": {
-					"type": "image",
-					"size": [
-						20,
-						20
-					],
-					"texture": "textures/ui/close_X_button"
-				}
-			},
-			{
-				"hover": {
-					"type": "image",
-					"size": [
-						20,
-						20
-					],
-					"texture": "textures/ui/close_X_button_hover"
-				}
-			}
-		],
-		"button_mappings": [
-			{
-				"from_button_id": "button.menu_select",
-				"to_button_id": "button.menu_exit",
-				"mapping_type": "pressed"
-			},
-			{
-				"from_button_id": "button.menu_ok",
-				"to_button_id": "button.menu_exit",
-				"mapping_type": "focused"
-			}
-		]
-	},
-	"title_bar": {
-		"type": "panel",
-		"layer": 100,
-		"anchor_from": "top_left",
-		"anchor_to": "top_left",
-		"size": [
-			"100%",
-			16
-		],
-		"offset": [
-			0,
-			-16
-		],
-		"controls": [
-			{
-				"text": {
-					"type": "label",
-					"font_type": "MinecraftTen",
-					"font_size": "medium",
-					"text": "Circuit Library",
-					"anchor_from": "left_middle",
-					"anchor_to": "left_middle",
-					"offset": [
-						5,
-						-1
-					],
-					"layer": 8,
-					"bindings": [
-						{
-							"binding_name": "#title_text"
-						}
-					]
-				}
-			},
-			{
-				"background@circuit_lib.background": {}
-			},
-			{
-				"close_button@circuit_lib.close_button": {
-					"offset": [
-						0,
-						-2
-					]
-				}
 			}
 		]
 	},
