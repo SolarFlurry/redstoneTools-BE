@@ -1,0 +1,7 @@
+{
+	"ui_defs": [
+		"ui/redtools/common.json",
+		"ui/server_form.json",
+		"ui/redtools/circuit_library.json"
+	]
+}

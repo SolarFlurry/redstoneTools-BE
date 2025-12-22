@@ -5,7 +5,7 @@
 			"identifier": "redtools:selection",
 			"basic_render_parameters": {
 				"material": "particles_blend",
-				"texture": "textures/particles/selection"
+				"texture": "textures/redtools/particles/selection"
 			}
 		},
 		"components": {

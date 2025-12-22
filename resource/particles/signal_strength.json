@@ -5,7 +5,7 @@
 			"identifier": "redtools:signal_strength",
 			"basic_render_parameters": {
 				"material": "particles_alpha",
-				"texture": "textures/particles/redstone_ss"
+				"texture": "textures/redtools/particles/redstone_ss"
 			}
 		},
 		"components": {
