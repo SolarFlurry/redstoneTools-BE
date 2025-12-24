@@ -43,12 +43,13 @@ export class PlayerData {
             const diff = Vector3Utils.subtract(start, Vector3Utils.floor(from))
             this.copyLocDiff = diff
             console.log(this.selection.dimension.getBlock(Vector3Utils.add(pos, start)).typeId)
-            this.clipboard.set(Vector3Utils.add(pos, diff), RegionBlock.fromBlock(this.selection.dimension.getBlock(Vector3Utils.add(pos, start))))
+            this.clipboard.set(pos, RegionBlock.fromBlock(this.selection.dimension.getBlock(Vector3Utils.add(pos, start))))
         })
     }
     public *pasteClipboard(location: Vector3, dimension: Dimension): Generator<void, void, void> {
+        let offset = Vector3Utils.add(this.copyLocDiff, location)
         for (const [key, value] of this.clipboard) {
-            value.place(dimension, Vector3Utils.add(key, location))
+            value.place(dimension, Vector3Utils.add(key, offset))
             yield;
         }
     }

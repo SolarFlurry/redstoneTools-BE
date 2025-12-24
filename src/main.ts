@@ -1,10 +1,9 @@
-import { world, system, StartupEvent, BlockVolume, MolangVariableMap } from '@minecraft/server'
+import { world, system, StartupEvent, BlockVolume, MolangVariableMap, Dimension } from '@minecraft/server'
 import { Vector3Utils } from 'utils/vector3'
 import { PlayerSelection } from 'core/selection'
 import { PlayerData, playerData } from 'core/player'
 import { StackCommand, stackCommandExecute } from 'commands/stack'
 import { SignalStrengthCommand, signalStrengthExecute } from 'commands/signalstrength'
-import { debugDrawer } from '@minecraft/debug-utilities'
 import { SetCommand, setCommandExecute } from 'commands/set'
 import { MoveCommand, moveCommandExecute } from 'commands/move'
 import { getRange } from 'utils/range'
@@ -16,6 +15,7 @@ import { CopyCommand, copyCommandExecute } from 'commands/copy'
 import { PasteCommand, pasteCommandExecute } from 'commands/paste'
 import JobPromise from 'utils/runjob'
 import { PreviewCommand, previewCommandExecute } from 'commands/preview'
+import { drawCube } from 'utils/render'
 
 system.beforeEvents.startup.subscribe((init: StartupEvent) => {
 	init.customCommandRegistry.registerEnum("redtools:direction", ["r", "l", "f", "b", "u", "d", "right", "left", "front", "back", "up", "down"])
@@ -92,6 +92,24 @@ world.afterEvents.worldLoad.subscribe((event) => {
 			}
 
 			if (data.previewClipboard) {
+				if (data.settings.hologramPreview && ticks % 2 == 0) {
+					new JobPromise(function* () {
+						const start = Vector3Utils.add(player.location, data.copyLocDiff)
+						for (const [key, value] of data.clipboard) {
+							if (["air", "redstone_wire", "redstone_torch", "unlit_redstone_torch"].map((v) => "minecraft:"+v).includes(value.block.type.id)) continue;
+							const pos = Vector3Utils.floor(Vector3Utils.add(start, key))
+							let size = 1.1;
+							let color = {red: 1, green: 0, blue: 0}
+							if (player.dimension.getBlock(pos).typeId == "minecraft:air") {
+								size = 0.8;
+								color.red = 0;
+								color.blue = 1;
+							}
+							drawCube({dimension: player.dimension, ...Vector3Utils.add(pos, {x: 0.5, y: 0.5, z: 0.5})}, {...color, alpha: 0.2}, size)
+							yield;
+						}
+					}, (progress) => {})
+				}
 				const min = Vector3Utils.new(0, 0, 0)
 				const max = data.clipboardSize
 				const vertices = [
@@ -119,17 +137,19 @@ world.afterEvents.worldLoad.subscribe((event) => {
 					[3, 7],
 				];
 				const vars = new MolangVariableMap();
-				vars.setColorRGB("dot_color", {red: 1, green: 1, blue: 1})
+				vars.setColorRGBA("dot_color", { red: 1, green: 1, blue: 1, alpha: 1 })
 				vars.setFloat("lifetime", 0.06)
-				new JobPromise(function* () {for (const edge of edges) {
-					const [startVertex, endVertex] = [vertices[edge[0]], vertices[edge[1]]];
-					const resolution = Math.min(Math.floor(Vector3Utils.magnitude(Vector3Utils.subtract(endVertex,startVertex))), 16);
-					for (let i = 0; i <= resolution; i++) {
-						const t = i / resolution;
-						player.dimension.spawnParticle("redtools:outline", Vector3Utils.floor(Vector3Utils.add(data.copyLocDiff, Vector3Utils.add(player.location, Vector3Utils.lerp(startVertex, endVertex, t)))), vars)
-						yield;
+				new JobPromise(function* () {
+					for (const edge of edges) {
+						const [startVertex, endVertex] = [vertices[edge[0]], vertices[edge[1]]];
+						const resolution = Math.min(Math.floor(Vector3Utils.magnitude(Vector3Utils.subtract(endVertex, startVertex))), 16);
+						for (let i = 0; i <= resolution; i++) {
+							const t = i / resolution;
+							player.dimension.spawnParticle("redtools:outline", Vector3Utils.floor(Vector3Utils.add(data.copyLocDiff, Vector3Utils.add(player.location, Vector3Utils.lerp(startVertex, endVertex, t)))), vars)
+							yield;
+						}
 					}
-				}}, (progress) => {})
+				}, (progress) => { })
 			}
 		}
 		ticks += 1;
