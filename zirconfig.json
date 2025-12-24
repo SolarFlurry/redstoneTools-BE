@@ -3,8 +3,8 @@
 	"author": "SolarFlurry",
 	"description": "A port of the mod 'Redstone Tools' to Bedrock",
 	"version": [
-		1,
 		0,
+		2,
 		0
 	],
 	"packs": {
